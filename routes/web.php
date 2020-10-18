@@ -16,6 +16,13 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+// Admin Panel Routes
+
+Route::group(['prefix'=>'admin'], function (){
+    Route::get('dashboard', 'DashboardController@dashboard')->name('admin.dashboard');
+
+});
+
 
 Auth::routes();
 
