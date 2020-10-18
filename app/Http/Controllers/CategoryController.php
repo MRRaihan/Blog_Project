@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+
 
 class CategoryController extends Controller
 {
@@ -24,7 +26,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        /*return view('admin.category.create');*/
+        return view('admin.category.create');
     }
 
     /**
@@ -35,7 +37,15 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|unique:categories,name',
+            /*'slug' => 'required',*/
+        ]);
+        $data = $request->except(['_token']);
+        $data['slug'] = Str::slug($request->name, '-');
+
+        Category::create($data);
+        return redirect()->route('category.index');
     }
 
     /**
