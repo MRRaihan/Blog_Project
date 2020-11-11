@@ -26,6 +26,30 @@
 
             <li class="nav-item has-treeview">
                 <a href="#" class="nav-link">
+                    <i class="nav-icon fas fa-user"></i>
+                    <p>
+                        User
+                        <i class="right fas fa-angle-left"></i>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="{{route('user.index')}}" class="nav-link">
+                            <i class="far  nav-icon"></i>
+                            <p>User List</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('user.create')}}" class="nav-link">
+                            <i class="far  nav-icon"></i>
+                            <p>Create New User</p>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="nav-item has-treeview">
+                <a href="#" class="nav-link">
                     <i class="nav-icon fas fa-tags"></i>
                     <p>
                         Category
