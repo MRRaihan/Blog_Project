@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -34,7 +35,22 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|min:6',
+        ]);
+
+            if ($request->password != null){
+                $data['password']=bcrypt($request->password);
+            }
+            $data['name'] = $request->name;
+            $data['email'] = $request->email;
+            $data['description'] = $request->description;
+
+        User::create($data);
+        session()->flash('success', 'User created successfully');
+        return redirect()->route('user.index');
     }
 
     /**

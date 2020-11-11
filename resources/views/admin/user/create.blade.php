@@ -36,24 +36,26 @@
                                     <form action="{{ route('user.store') }}" method="POST">
                                         @csrf
                                         <div class="card-body">
-{{--
                                             @include('includes.errors')
---}}
                                             <div class="form-group">
                                                 <label for="name">User name</label>
-                                                <input type="name" name="name" class="form-control" id="name" placeholder="Enter name">
+                                                <input type="name" name="name" value="{{old('name')}}" class="form-control" id="name" placeholder="Enter name">
                                             </div>
                                             <div class="form-group">
                                                 <label for="email">User email</label>
-                                                <input type="email" name="email" class="form-control" id="email" placeholder="Enter email">
+                                                <input type="email" name="email" value="{{old('email')}}" class="form-control" id="email" placeholder="Enter email">
                                             </div>
                                             <div class="form-group">
                                                 <label for="password">User password</label>
                                                 <input type="password" name="password" class="form-control" id="password" placeholder="Enter password">
                                             </div>
+                                            <div class="form-group">
+                                                <label for="description">Description</label>
+                                                <textarea name="description" id="description" rows="4" class="form-control" placeholder="Enter description">{{old('description')}}</textarea>
+                                            </div>
                                         </div>
                                         <div class="card-footer">
-                                            <button type="submit" class="btn btn-lg btn-primary">Submit</button>
+                                            <button type="submit" class="btn btn-lg btn-primary">Save</button>
                                         </div>
                                     </form>
                                 </div>
