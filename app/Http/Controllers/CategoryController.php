@@ -47,6 +47,7 @@ class CategoryController extends Controller
         $data['slug'] = Str::slug($request->name, '-');
 
         Category::create($data);
+        session()->flash('success', 'Category Create Successfully');
         return redirect()->route('category.index');
     }
 
@@ -91,6 +92,7 @@ class CategoryController extends Controller
         $data['slug'] = Str::slug($request->name, '-');
 
         $category->update($data);
+        session()->flash('success', 'Category Update Successfully');
         return redirect()->route('category.index');
     }
 
