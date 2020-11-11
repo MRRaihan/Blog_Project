@@ -16,15 +16,16 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-// Admin Panel Routes
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+
+// *******Admin Panel Routes******//
 
 Route::group(['prefix'=>'admin'], function (){
     Route::get('dashboard', 'DashboardController@dashboard')->name('admin.dashboard');
     Route::resource('category', 'CategoryController');
 
 });
-
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
