@@ -40,6 +40,9 @@
                                             <div class="form-group">
                                                 <label for="name">Category name</label>
                                                 <input type="name" name="name" class="form-control" value="{{ $category->name }}" placeholder="Enter name">
+                                                @error('name')
+                                                <div class="text-danger">{{ $message }}</div>
+                                                @enderror
                                             </div>
                                             <div class="form-group">
                                                 <label for="exampleInputPassword1">Description</label>
