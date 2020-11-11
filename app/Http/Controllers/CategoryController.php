@@ -58,7 +58,7 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        //
+
     }
 
     /**
@@ -69,7 +69,8 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+        $data['category']= $category;
+        return view('admin.category.edit', $data);
     }
 
     /**
@@ -81,7 +82,16 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+
+        $this->validate($request, [
+            'name' => "required|unique:categories,name,$category->id",
+        ]);
+
+        $data = $request->except(['_token']);
+        $data['slug'] = Str::slug($request->name, '-');
+
+        $category->update($data);
+        return redirect()->route('category.index');
     }
 
     /**
