@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Tag;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
 class TagController extends Controller
@@ -14,7 +15,9 @@ class TagController extends Controller
      */
     public function index()
     {
-        //
+        $data['tags'] = Tag::orderBy('created_at', 'DESC')->paginate(2);
+        $data['serial'] = 1;
+        return view('admin.tag.index', $data);
     }
 
     /**
@@ -24,7 +27,7 @@ class TagController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.tag.create');
     }
 
     /**
@@ -35,7 +38,18 @@ class TagController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // validation
+        $this->validate($request, [
+            'name' => 'required|unique:tags,name',
+        ]);
+
+        $data = $request->except(['_token']);
+        $data['slug'] = Str::slug($request->name, '-');
+
+
+        Tag::create($data);
+        session()->flash('success', 'Tag Create Successfully');
+        return redirect()->route('tag.index');
     }
 
     /**
