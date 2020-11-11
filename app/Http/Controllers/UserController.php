@@ -14,7 +14,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        $data['users'] = User::orderBy('created_at', 'DESC')->paginate(2);
+        $data['serial'] = 1;
+        return view('admin.user.index', $data);
     }
 
     /**
