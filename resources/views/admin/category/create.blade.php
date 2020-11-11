@@ -1,5 +1,5 @@
 @extends('layouts.admin.master')
-@section('title', 'Admin')
+@section('title', 'Create Category')
 @section('content')
 
     <!-- Content Header (Page header) -->
