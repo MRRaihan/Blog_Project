@@ -56,7 +56,7 @@
                                                 <form action="{{ route('category.destroy', $category->id) }}" class="mr-1" method="POST">
                                                     @method('DELETE')
                                                     @csrf
-                                                    <button type="submit" class="btn btn-sm btn-danger"> <i class="fas fa-trash"></i> </button>
+                                                    <button type="submit" onclick="return confirm('Are you confirm ?')" class="btn btn-sm btn-danger"> <i class="fas fa-trash"></i> </button>
                                                 </form>
                                                 {{-- <a href="{{ route('category.show', [$category->id]) }}" class="btn btn-sm btn-success mr-1"> <i class="fas fa-eye"></i> </a> --}}
                                             </td>
