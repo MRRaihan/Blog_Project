@@ -14,7 +14,9 @@ class AuthorController extends Controller
      */
     public function index()
     {
-        //
+        $data['authors'] = Author::orderBy('created_at', 'DESC')->paginate(10);
+        $data['serial'] = 1;
+        return view('admin.author.index', $data);
     }
 
     /**
@@ -24,7 +26,7 @@ class AuthorController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.author.create');
     }
 
     /**
@@ -35,7 +37,15 @@ class AuthorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|unique:categories,name',
+            'email' => 'required|email|unique:users,email',
+        ]);
+        $data = $request->except(['_token']);
+
+        Author::create($data);
+        session()->flash('success', 'Author Create Successfully');
+        return redirect()->route('author.index');
     }
 
     /**
@@ -57,7 +67,8 @@ class AuthorController extends Controller
      */
     public function edit(Author $author)
     {
-        //
+        $data['author']= $author;
+        return view('admin.author.edit', $data);
     }
 
     /**
@@ -69,7 +80,19 @@ class AuthorController extends Controller
      */
     public function update(Request $request, Author $author)
     {
-        //
+        $this->validate($request, [
+            'name' => "required|unique:categories,name,$author->id",
+            'email' => 'required|email|unique:users,email',
+
+        ]);
+
+        $data['name'] = $request->name;
+        $data['email'] = $request->email;
+        $data['about'] = $request->about;
+
+        $author->update($data);
+        session()->flash('success', 'Author Update Successfully');
+        return redirect()->route('author.index');
     }
 
     /**
@@ -80,6 +103,11 @@ class AuthorController extends Controller
      */
     public function destroy(Author $author)
     {
-        //
+        if($author){
+            $author->delete();
+
+            session()->flash('success', 'Author deleted successfully');
+            return redirect()->route('author.index');
+        }
     }
 }
