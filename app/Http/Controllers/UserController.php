@@ -74,7 +74,8 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data['user'] = User::findOrFail($id);
+        return view('admin.user.edit', $data);
     }
 
     /**
@@ -84,9 +85,25 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required|string|max:255',
+            'email' => "required|email|unique:users,email, $user->id",
+            'password' => 'sometimes|nullable|min:6',
+        ]);
+
+        if ($request->password != null){
+            $data['password']=bcrypt($request->password);
+        }
+
+        $data['name'] = $request->name;
+        $data['email'] = $request->email;
+        $data['description'] = $request->description;
+
+        $user->update($data);
+        session()->flash('success', 'User updated successfully');
+        return redirect()->route('user.index');
     }
 
     /**
@@ -97,6 +114,8 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        User::destroy($id);
+        session()->flash('success', 'User Deleted successfully');
+        return redirect()->route('user.index');
     }
 }

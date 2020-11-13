@@ -58,7 +58,7 @@
                                                 <form action="{{ route('user.destroy', [$user->id]) }}" class="mr-1" method="POST">
                                                     @method('DELETE')
                                                     @csrf
-                                                    <button type="submit" class="btn btn-sm btn-danger"> <i class="fas fa-trash"></i> </button>
+                                                    <button type="submit" onclick="return confirm('Are you confirm ?')" class="btn btn-sm btn-danger"> <i class="fas fa-trash"></i> </button>
                                                 </form>
                                             </td>
                                         </tr>
