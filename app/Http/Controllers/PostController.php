@@ -19,7 +19,9 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        $data['posts'] = Post::orderBy('created_at', 'DESC')->paginate(20);
+        $data['serial'] = 1;
+        return view('admin.post.index', $data);
     }
 
     /**

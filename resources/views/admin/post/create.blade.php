@@ -122,7 +122,7 @@
     <script src="{{ asset('admin/js/summernote-bs4.min.js') }}"></script>
     <script>
         $('#description').summernote({
-            placeholder: 'Hello Bootstrap 4',
+            placeholder: 'Post Description',
             tabsize: 2,
             height: 300
         });
