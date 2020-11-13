@@ -32,8 +32,10 @@
 <script src="{{asset('assets/admin/dist/js/pages/dashboard.js')}}"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{asset('assets/admin/dist/js/demo.js')}}"></script>
+<script src="{{asset('assets/admin/plugins/bs-custom-file-input/bs-custom-file-input.min.js')}}"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+@yield('script')
 <script>
     @if(Session::has('success'))
     toastr.success("{{ Session::get('success') }}");
