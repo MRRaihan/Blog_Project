@@ -15,7 +15,7 @@ class TagController extends Controller
      */
     public function index()
     {
-        $data['tags'] = Tag::orderBy('created_at', 'DESC')->paginate(2);
+        $data['tags'] = Tag::orderBy('created_at', 'DESC')->paginate(10);
         $data['serial'] = 1;
         return view('admin.tag.index', $data);
     }

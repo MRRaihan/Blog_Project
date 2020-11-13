@@ -16,7 +16,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $data['categories'] = Category::orderBy('created_at', 'DESC')->paginate(2);
+        $data['categories'] = Category::orderBy('created_at', 'DESC')->paginate(10);
         $data['serial'] = 1;
         return view('admin.category.index', $data);
     }
