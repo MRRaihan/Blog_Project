@@ -96,7 +96,7 @@
                                                 <label class="form-check-label">Published</label>
                                             </div>
                                             <div class="form-check">
-                                                <input @if(old('status') == 'unpublished') checked @endif value="published" type="radio" class="form-check-input" name="status" id="published">
+                                                <input @if(old('status') == 'unpublished') checked @endif value="unpublished" type="radio" class="form-check-input" name="status" id="unpublished">
                                                 <label class="form-check-label">Unpublished</label>
                                             </div>
                                         </div>

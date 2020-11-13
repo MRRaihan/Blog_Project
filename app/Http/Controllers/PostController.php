@@ -89,7 +89,8 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        //
+        $data['post'] = $post;
+        return view('admin.post.show', $data);
     }
 
     /**
@@ -160,6 +161,16 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        if($post){
+            if(file_exists(($post->image))){
+                unlink($post->image);
+            }
+
+            $post->delete();
+            session()->flash('Post deleted successfully');
+        }
+
+        return redirect()->route('post.index');
     }
+
 }
