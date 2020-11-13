@@ -29,6 +29,7 @@ Route::group(['prefix'=>'admin'], function (){
 
     Route::resource('user', 'UserController');
     Route::resource('category', 'CategoryController');
+    Route::resource('author', 'AuthorController');
     Route::resource('tag', 'TagController');
 
 });

@@ -28,7 +28,7 @@
                 <a href="#" class="nav-link">
                     <i class="nav-icon fas fa-user"></i>
                     <p>
-                        User
+                        Users
                         <i class="right fas fa-angle-left"></i>
                     </p>
                 </a>
@@ -52,7 +52,7 @@
                 <a href="#" class="nav-link">
                     <i class="nav-icon fas fa-tags"></i>
                     <p>
-                        Category
+                        Categories
                         <i class="right fas fa-angle-left"></i>
                     </p>
                 </a>
@@ -74,9 +74,33 @@
 
             <li class="nav-item has-treeview">
                 <a href="#" class="nav-link">
+                    <i class="nav-icon fas fa-user-shield"></i>
+                    <p>
+                        Authors
+                        <i class="right fas fa-angle-left"></i>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="{{route('author.index')}}" class="nav-link">
+                            <i class="far  nav-icon"></i>
+                            <p>Author List</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('author.create')}}" class="nav-link">
+                            <i class="far  nav-icon"></i>
+                            <p>Create New Author</p>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="nav-item has-treeview">
+                <a href="#" class="nav-link">
                     <i class="nav-icon fas fa-tag"></i>
                     <p>
-                        Tag
+                        Tags
                         <i class="right fas fa-angle-left"></i>
                     </p>
                 </a>
