@@ -31,9 +31,9 @@ class PostController extends Controller
      */
     public function create()
     {
-        $data['tags'] = Tag::all();
-        $data['categories'] = Category::all();
-        $data['authors'] = Author::all();
+        $data['categories'] = Category::orderBy('name')->get();
+        $data['authors'] = Author::orderBy('name')->get();
+        $data['tags'] = Tag::orderBy('name')->get();
         return view('admin.post.create', $data);
 
     }
@@ -100,7 +100,12 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+
+        $data['categories'] = Category::orderBy('name')->get();
+        $data['authors'] = Author::orderBy('name')->get();
+        $data['tags'] = Tag::orderBy('name')->get();
+        $data['post'] = $post;
+        return view('admin.post.edit', $data);
     }
 
     /**
@@ -112,7 +117,39 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        //
+        $this->validate($request, [
+            'category' => 'required',
+            'author'=>'required',
+            'title' => "required|unique:posts,title, $post->id",
+            'image'=>'image|mimes:jpeg,png,jpg|max:2048',
+            'description' => 'required',
+            'status'=>'required',
+        ]);
+
+        if ($request->hasFile('image')){
+            $file = $request->file('image');
+            $path ='images/upload/posts';
+            $file_name = time() . $file->getClientOriginalName();
+            $file->move($path, $file_name);
+            $data['image']= $path.'/'. $file_name;
+
+            if (file_exists($post->image)){
+                unlink($post->image);
+            }
+        }
+
+        $data['title'] = $request->title;
+        $data['slug'] = Str::slug($request->title);
+        $data['description'] = $request->description;
+        $data['category_id'] = $request->category;
+        $data['author_id'] = $request->author;
+        $data['status'] = $request->status;
+        $post->tags()->sync($request->tags);
+
+
+        $post->update($data);
+        session()->flash('success', 'Post updated successfully');
+        return redirect()->route('post.index');
     }
 
     /**
